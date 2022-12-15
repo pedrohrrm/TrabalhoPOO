@@ -5,7 +5,7 @@ package modelos;
  *
  * @author pedro
  */
-public class Pessoa {
+abstract public class Pessoa {
     protected int id;
     protected String nome;
     protected String endereco;

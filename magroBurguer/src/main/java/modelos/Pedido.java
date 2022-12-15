@@ -4,8 +4,9 @@
  */
 package modelos;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Calendar;
+
+
 
 /**
  *
@@ -13,23 +14,47 @@ import java.sql.Time;
  */
 public class Pedido {
     private int id;
+    private Cliente cliente;
     private String descricaoDetalhada;
     private int identificadorDescricao;
     private float valor;
-    private Date dataPedido;
-    private Time horarioPedido;
-    private Time horarioEntrega;
+    private Calendar dataHoraPedido;
+    private String horarioEntrega;
     private String adicionais;
+    
 
-    public Pedido(int id, String descricaoDetalhada, int identificadorDescricao, float valor, Date dataPedido, Time horarioPedido, Time horarioEntrega, String adicionais) {
+    public Pedido(Cliente cliente, float valor, Calendar dataHoraPedido, String adicionais) {
+        this.cliente = cliente;
+        this.valor = valor;
+        this.dataHoraPedido = dataHoraPedido;
+        this.adicionais = adicionais;
+    }
+
+    public Pedido(int id, Cliente cliente, String descricaoDetalhada, int identificadorDescricao, float valor, Calendar dataHoraPedido, String horarioEntrega, String adicionais) {
         this.id = id;
+        this.cliente = cliente;
         this.descricaoDetalhada = descricaoDetalhada;
         this.identificadorDescricao = identificadorDescricao;
         this.valor = valor;
-        this.dataPedido = dataPedido;
-        this.horarioPedido = horarioPedido;
+        this.dataHoraPedido = dataHoraPedido;
         this.horarioEntrega = horarioEntrega;
         this.adicionais = adicionais;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public String getDescricaoDetalhada() {
@@ -56,27 +81,19 @@ public class Pedido {
         this.valor = valor;
     }
 
-    public Date getDataPedido() {
-        return dataPedido;
+    public Calendar getDataHoraPedido() {
+        return dataHoraPedido;
     }
 
-    public void setDataPedido(Date dataPedido) {
-        this.dataPedido = dataPedido;
+    public void setDataHoraPedido(Calendar dataHoraPedido) {
+        this.dataHoraPedido = dataHoraPedido;
     }
 
-    public Time getHorarioPedido() {
-        return horarioPedido;
-    }
-
-    public void setHorarioPedido(Time horarioPedido) {
-        this.horarioPedido = horarioPedido;
-    }
-
-    public Time getHorarioEntrega() {
+    public String getHorarioEntrega() {
         return horarioEntrega;
     }
 
-    public void setHorarioEntrega(Time horarioEntrega) {
+    public void setHorarioEntrega(String horarioEntrega) {
         this.horarioEntrega = horarioEntrega;
     }
 
@@ -88,7 +105,6 @@ public class Pedido {
         this.adicionais = adicionais;
     }
 
-   
     
-    
+              
 }

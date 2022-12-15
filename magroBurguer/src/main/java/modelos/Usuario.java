@@ -4,31 +4,22 @@ package modelos;
  *
  * @author pedro
  */
-public class Usuario {
-    private int id;
-    private String nome;
-    private String CPF;
-    private String endereco;
-    private String celular;
-    private String nivelAcesso;
+public class Usuario extends Pessoa {
+    protected String CPF;
+    protected String nivelAcesso;
     protected String senha;
 
-    public Usuario(int id, String nome, String CPF, String endereco, String celular, String nivelAcesso, String senha) {
-        this.id = id;
-        this.nome = nome;
-        this.CPF = CPF;
-        this.endereco = endereco;
-        this.celular = celular;
+    public Usuario(int id, String nome, String nivelAcesso, String senha) {
+        super(id, nome);
         this.nivelAcesso = nivelAcesso;
         this.senha = senha;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Usuario(String CPF, String nivelAcesso, String senha, int id, String nome, String endereco, String celular) {
+        super(id, nome, endereco, celular);
+        this.CPF = CPF;
+        this.nivelAcesso = nivelAcesso;
+        this.senha = senha;
     }
 
     public String getCPF() {
@@ -37,22 +28,6 @@ public class Usuario {
 
     public void setCPF(String CPF) {
         this.CPF = CPF;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
     }
 
     public String getNivelAcesso() {
@@ -70,8 +45,5 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    
-
 }
  

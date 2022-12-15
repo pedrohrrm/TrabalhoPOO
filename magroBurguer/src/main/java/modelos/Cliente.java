@@ -12,12 +12,12 @@ public class Cliente extends Pessoa {
 
     private String dadosUltimosPedidos;
 
-    public Cliente(String dadosUltimosPedidos, int id, String nome, String endereco, String celular) {
+    public Cliente(int id, String nome, String endereco, String celular, String dadosUltimosPedidos) {
         super(id, nome, endereco, celular);
         this.dadosUltimosPedidos = dadosUltimosPedidos;
     }
 
-    public Cliente(String dadosUltimosPedidos, int id, String nome) {
+    public Cliente(int id, String nome, String dadosUltimosPedidos) {
         super(id, nome);
         this.dadosUltimosPedidos = dadosUltimosPedidos;
     }
