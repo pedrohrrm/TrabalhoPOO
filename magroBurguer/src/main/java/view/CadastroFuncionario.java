@@ -26,6 +26,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSpinner1 = new javax.swing.JSpinner();
         CaixaTextoCelFunc = new javax.swing.JTextField();
         CelFunc = new javax.swing.JLabel();
         CaixaTextoEndFunc = new javax.swing.JTextField();
@@ -49,6 +50,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 300, -1, -1));
 
         CaixaTextoCelFunc.setBackground(new java.awt.Color(255, 255, 255));
         CaixaTextoCelFunc.addActionListener(new java.awt.event.ActionListener() {
@@ -260,5 +262,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel NomeFunc;
     private javax.swing.JMenuItem ProdutoLanches;
     private javax.swing.JMenuItem ProdutosBebidas;
+    private javax.swing.JSpinner jSpinner1;
     // End of variables declaration//GEN-END:variables
 }

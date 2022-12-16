@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package modelos;
+
+import java.util.Scanner;
 
 /**
  *
@@ -11,6 +10,8 @@ package modelos;
 public class Cliente extends Pessoa {
 
     private String dadosUltimosPedidos;
+
+    
 
     public Cliente(int id, String nome, String endereco, String celular, String dadosUltimosPedidos) {
         super(id, nome, endereco, celular);
@@ -29,5 +30,12 @@ public class Cliente extends Pessoa {
     public void setDadosUltimosPedidos(String dadosUltimosPedidos) {
         this.dadosUltimosPedidos = dadosUltimosPedidos;
     }
+
+    @Override
+    public String toString() {
+        return "Nome Cliente: " + this.nome + "Endereço Cliente: " + this.endereco + "Dados Ultimios Pedidos Cliente: "+ this.dadosUltimosPedidos; 
+    }
+    
+   
 
 }
