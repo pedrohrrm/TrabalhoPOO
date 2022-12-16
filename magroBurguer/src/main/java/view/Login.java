@@ -4,17 +4,25 @@
  */
 package view;
 
+import controller.LoginController;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author pedro
  */
-public class view extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
+
+    private final LoginController controller;
 
     /**
      * Creates new form views
      */
-    public view() {
+    public Login() {
         initComponents();
+        controller = new LoginController(this);
     }
 
     /**
@@ -100,7 +108,10 @@ public class view extends javax.swing.JFrame {
     }//GEN-LAST:event_TextSenhaActionPerformed
 
     private void BotaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoEntrarActionPerformed
-        // TODO add your handling code here:
+        // executar quando clicar no botão entrar:
+        this.controller.FizLogin();
+
+        
     }//GEN-LAST:event_BotaoEntrarActionPerformed
 
     /**
@@ -120,21 +131,23 @@ public class view extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new view().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
@@ -149,4 +162,26 @@ public class view extends javax.swing.JFrame {
     private javax.swing.JLabel TituloSenha;
     private javax.swing.JLabel TituloUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public void exibeMensagem(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+
+    public JPasswordField getTextSenha() {
+        return TextSenha;
+    }
+
+    public void setTextSenha(JPasswordField TextSenha) {
+        this.TextSenha = TextSenha;
+    }
+
+    public JTextField getTextUsuario() {
+        return TextUsuario;
+    }
+
+    public void setTextUsuario(JTextField TextUsuario) {
+        this.TextUsuario = TextUsuario;
+    }
+    
+    
 }

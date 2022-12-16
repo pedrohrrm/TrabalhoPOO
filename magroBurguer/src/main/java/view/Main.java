@@ -1,7 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+//ATENÇÃO: AS IMAGENS E ÍCONES UTILIZADOS NESSE PROJETO PERTENCEM A: ICONIFY, ICONS8, UNSPLASH E PEXELS
+
 package view;
 
 import java.util.Calendar;
