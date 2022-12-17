@@ -1,6 +1,10 @@
 
 package modelos;
 
+import controller.ClienteController;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  *
  * @author pedro
@@ -10,27 +14,31 @@ abstract public class Pessoa {
     protected String nome;
     protected String endereco;
     protected String celular;
-
-    public Pessoa(int id, String nome) {
-        this.id = id;
+    
+    public Pessoa() {}
+    
+    public Pessoa(String nome) {
         this.nome = nome;
     }
 
-    public Pessoa(int id, String nome, String endereco, String celular) {
-        this.id = id;
+    public Pessoa(String nome, String endereco) throws IOException {
+        GeraId();
+        this.nome = nome;
+        this.endereco = endereco;
+        
+    }
+
+    public Pessoa(String nome, String endereco, String celular) throws IOException {
+        GeraId();
         this.nome = nome;
         this.endereco = endereco;
         this.celular = celular;
     }
-
+    
     public int getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
     public String getNome() {
         return nome;
     }
@@ -54,5 +62,22 @@ abstract public class Pessoa {
     public void setCelular(String celular) {
         this.celular = celular;
     }
-   
+    
+    /**
+     * 
+     * Gera Id para pessoa
+     * 
+     */
+    private void GeraId() throws FileNotFoundException {  
+        ClienteController clienteController = new ClienteController();
+        Cliente[] lista = clienteController.retornaListaClientes();
+        
+        if (lista != null) {
+            this.id = lista.length + 1;
+        } else {
+            this.id = 1;
+        }
+        
+      
+    } 
 }
