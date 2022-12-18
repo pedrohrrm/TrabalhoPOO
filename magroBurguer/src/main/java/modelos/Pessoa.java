@@ -76,8 +76,6 @@ abstract public class Pessoa {
             this.id = lista.length + 1;
         } else {
             this.id = 1;
-        }
-        
-      
+        } 
     } 
 }

@@ -7,47 +7,33 @@ package modelos;
  */
 public class Produto{
     private int id;
-    private String descricaoDoProduto;
-    private float valorProduto;
-    private String adicionais;
+    private String descricao;
+    private float valor;
 
-    public Produto(int id, String descricaoDoProduto, float valorProduto) {
-        this.id = id;
-        this.descricaoDoProduto = descricaoDoProduto;
-        this.valorProduto = valorProduto;
+    public Produto(String descricao, float valor) {
+        this.descricao = descricao;
+        this.valor = valor;
     }
 
     public int getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
+    
+    public String getDescricao() {
+        return descricao;
     }
 
-    public String getDescricaoDoProduto() {
-        return descricaoDoProduto;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public void setDescricaoDoProduto(String descricaoDoProduto) {
-        this.descricaoDoProduto = descricaoDoProduto;
+    public float getValor() {
+        return valor;
     }
 
-    public float getValorProduto() {
-        return valorProduto;
+    public void setValor(float valor) {
+        this.valor = valor;
     }
 
-    public void setValorProduto(float valorProduto) {
-        this.valorProduto = valorProduto;
-    }
-
-    public String getAdicionais() {
-        return adicionais;
-    }
-
-    public void setAdicionais(String adicionais) {
-        this.adicionais = adicionais;
-    }
     
 }
-    

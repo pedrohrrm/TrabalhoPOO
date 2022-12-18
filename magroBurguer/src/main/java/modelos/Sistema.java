@@ -2,6 +2,7 @@
 package modelos;
 
 import controller.ClienteController;
+import controller.PedidoController;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,29 +13,16 @@ import java.util.Scanner;
 public class Sistema  {
     
     public static void main(String[] args) throws IOException {
-        String nome;
-        String endereco;
-        String celular;
-        
-        ClienteController ClienteController = new ClienteController();
-    
-        Scanner dados = new Scanner(System.in);
 
+        ClienteController clienteController = new ClienteController();
+        PedidoController pedidoController = new PedidoController();
         
-         
-//        ClienteController.AlteraCliente();
+        clienteController.AlteraCliente();     
+//        clienteController.CadastraCliente();
         
+//        pedidoController.EfetuaPedido();
+//        pedidoController.ExcluiPedido();
         
-        System.out.printf("Informe o nome: ");
-        nome = dados.nextLine();
-        
-        System.out.printf("Informe o endereço: ");
-        endereco = dados.nextLine();
-        
-        System.out.printf("Informe o celular: ");
-        celular = dados.nextLine();
-
-        ClienteController.CadastraCliente(nome, endereco, celular);
         
     }
     

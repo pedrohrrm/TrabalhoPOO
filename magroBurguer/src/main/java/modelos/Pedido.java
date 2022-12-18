@@ -1,8 +1,7 @@
 package modelos;
 
+import controller.PedidoController;
 import java.util.Calendar;
-
-
 
 /**
  *
@@ -10,63 +9,47 @@ import java.util.Calendar;
  */
 public class Pedido {
     private int id;
-    private Cliente cliente;
-    private String descricaoDetalhada;
-    private int identificadorDescricao;
+    private int idCliente;
+    private int idProduto;
+    private int idVendedor;
     private float valor;
-    private Calendar dataHoraPedido;
-    private String horarioEntrega;
-    private String adicionais;
-    
+    private Calendar dataHora;
 
-    public Pedido(Cliente cliente, float valor, Calendar dataHoraPedido, String adicionais) {
-        this.cliente = cliente;
+    public Pedido(int idCliente, int idProduto, int idVendedor, float valor, Calendar dataHora) {
+        this.idCliente = idCliente;
+        this.idProduto = idProduto;
+        this.idVendedor = idVendedor;
         this.valor = valor;
-        this.dataHoraPedido = dataHoraPedido;
-        this.adicionais = adicionais;
-    }
-
-    public Pedido(int id, Cliente cliente, String descricaoDetalhada, int identificadorDescricao, float valor, Calendar dataHoraPedido, String horarioEntrega, String adicionais) {
-        this.id = id;
-        this.cliente = cliente;
-        this.descricaoDetalhada = descricaoDetalhada;
-        this.identificadorDescricao = identificadorDescricao;
-        this.valor = valor;
-        this.dataHoraPedido = dataHoraPedido;
-        this.horarioEntrega = horarioEntrega;
-        this.adicionais = adicionais;
+        this.dataHora = dataHora;
+        GeraId();
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public int getIdProduto() {
+        return idProduto;
     }
 
-    public String getDescricaoDetalhada() {
-        return descricaoDetalhada;
+    public void setIdProduto(int idProduto) {
+        this.idProduto = idProduto;
     }
 
-    public void setDescricaoDetalhada(String descricaoDetalhada) {
-        this.descricaoDetalhada = descricaoDetalhada;
+    public int getIdVendedor() {
+        return idVendedor;
     }
 
-    public int getIdentificadorDescricao() {
-        return identificadorDescricao;
-    }
-
-    public void setIdentificadorDescricao(int identificadorDescricao) {
-        this.identificadorDescricao = identificadorDescricao;
+    public void setIdVendedor(int idVendedor) {
+        this.idVendedor = idVendedor;
     }
 
     public float getValor() {
@@ -77,30 +60,22 @@ public class Pedido {
         this.valor = valor;
     }
 
-    public Calendar getDataHoraPedido() {
-        return dataHoraPedido;
+    public Calendar getDataHora() {
+        return dataHora;
     }
 
-    public void setDataHoraPedido(Calendar dataHoraPedido) {
-        this.dataHoraPedido = dataHoraPedido;
+    public void setDataHora(Calendar dataHora) {
+        this.dataHora = dataHora;
     }
 
-    public String getHorarioEntrega() {
-        return horarioEntrega;
-    }
-
-    public void setHorarioEntrega(String horarioEntrega) {
-        this.horarioEntrega = horarioEntrega;
-    }
-
-    public String getAdicionais() {
-        return adicionais;
-    }
-
-    public void setAdicionais(String adicionais) {
-        this.adicionais = adicionais;
-    }
-
-    
-              
+    private void GeraId() {  
+        PedidoController pedidoController = new PedidoController();
+        Pedido[] lista = pedidoController.retornaListaPedidos();
+        
+        if (lista != null) {
+            this.id = lista.length + 1;
+        } else {
+            this.id = 1;
+        } 
+    }            
 }

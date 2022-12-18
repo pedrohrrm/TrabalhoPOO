@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelos.Cliente;
 
 /**
@@ -21,21 +23,31 @@ import modelos.Cliente;
  * @author joaop
  */
 public class ClienteController {
-    public void CadastraCliente(String nome, String endereco, String celular) throws IOException {
+    
+    public void CadastraCliente() throws IOException {
+        String nome;
+        String endereco;
+        String celular = "";
+        
+        Scanner dados = new Scanner(System.in);
+        System.out.printf("Informe o nome: ");
+        nome = dados.nextLine();
+        
+        System.out.printf("Informe o endereço: ");
+        endereco = dados.nextLine();
+        
+        System.out.printf("Informe o celular: ");
+        celular = dados.nextLine();
+        
         if (!ValidaCliente(nome, endereco)) {
             System.out.println("Dados do cliente inválidos");
             return;
-        }
+        }   
         
-        if (!"".equals(celular)) {
-            GravaDadosCliente(nome, endereco, celular);
-        } else {
-            Cliente cliente = new Cliente(nome, endereco);
-            System.out.println(cliente.toString());
-        }
+        GravaDadosCliente(nome, endereco, celular);  
     }
     
-    public void AlteraCliente() throws IOException {
+    public void AlteraCliente() {
         String id;
         String nome = "";
         String endereco = "";
@@ -55,11 +67,11 @@ public class ClienteController {
         System.out.printf("Informe o celular: ");
         celular = dados.nextLine();
         
-        if(!("".equals(nome) && "".equals(endereco) && "".equals(celular))) {
+        if ((!"".equals(nome)) && (!"".equals(endereco)) && (!"".equals(celular))) {
             if (!ValidaCliente(nome, endereco, celular)) {
                 return;
             }
-        } else if (!("".equals(nome) && "".equals(endereco))) {
+        } else if ((!"".equals(nome)) && (!"".equals(endereco)))  {
             if (!ValidaCliente(nome, endereco)) {
                 return;
             } 
@@ -84,7 +96,7 @@ public class ClienteController {
                     lista[i].setEndereco(endereco);
                 }
                 
-                if (!"".equals(nome)) {
+                if (!"".equals(celular)) {
                     lista[i].setCelular(celular);
                 }
          
@@ -101,7 +113,9 @@ public class ClienteController {
             //Escreve Json convertido em arquivo chamado "cliente.json"
             FileWriter writer = new FileWriter("cliente.json")) {
             writer.write(json);
-        }
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
     
     public Boolean ValidaCliente(String nome) {
@@ -140,10 +154,15 @@ public class ClienteController {
         }
     }
     
-    public Cliente[] retornaListaClientes() throws FileNotFoundException {
+    public Cliente[] retornaListaClientes() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        BufferedReader json = new BufferedReader(new FileReader("cliente.json"));
+        BufferedReader json = null;
+        try {
+            json = new BufferedReader(new FileReader("cliente.json"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
         Cliente[] lista = gson.fromJson(json, Cliente[].class);
 

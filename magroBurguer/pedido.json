@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "idCliente": 1,
+    "idProduto": 2,
+    "idVendedor": 3,
+    "valor": 10.0,
+    "dataHora": {
+      "year": 2022,
+      "month": 11,
+      "dayOfMonth": 18,
+      "hourOfDay": 1,
+      "minute": 39,
+      "second": 45
+    }
+  },
+  {
+    "id": 2,
+    "idCliente": 2,
+    "idProduto": 3,
+    "idVendedor": 5,
+    "valor": 100.0,
+    "dataHora": {
+      "year": 2022,
+      "month": 11,
+      "dayOfMonth": 18,
+      "hourOfDay": 1,
+      "minute": 46,
+      "second": 50
+    }
+  },
+  {
+    "id": 3,
+    "idCliente": 1,
+    "idProduto": 2,
+    "idVendedor": 3,
+    "valor": 4.0,
+    "dataHora": {
+      "year": 2022,
+      "month": 11,
+      "dayOfMonth": 18,
+      "hourOfDay": 1,
+      "minute": 52,
+      "second": 5
+    }
+  }
+]
