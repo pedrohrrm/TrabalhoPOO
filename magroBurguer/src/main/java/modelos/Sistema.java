@@ -4,7 +4,6 @@ package modelos;
 import controller.ClienteController;
 import controller.PedidoController;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  *
@@ -17,11 +16,14 @@ public class Sistema  {
         ClienteController clienteController = new ClienteController();
         PedidoController pedidoController = new PedidoController();
         
-        clienteController.AlteraCliente();     
+//        clienteController.AlteraCliente();     
 //        clienteController.CadastraCliente();
         
 //        pedidoController.EfetuaPedido();
 //        pedidoController.ExcluiPedido();
+//        pedidoController.ImprimeDadosPedido();
+        pedidoController.CancelaPedido();
+//        pedidoController.AlteraStatusPedido(1, 4);
         
         
     }

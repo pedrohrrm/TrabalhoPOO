@@ -1,47 +1,20 @@
 [
   {
     "id": 1,
-    "idCliente": 1,
-    "idProduto": 2,
-    "idVendedor": 3,
-    "valor": 10.0,
-    "dataHora": {
-      "year": 2022,
-      "month": 11,
-      "dayOfMonth": 18,
-      "hourOfDay": 1,
-      "minute": 39,
-      "second": 45
-    }
+    "idCliente": 4,
+    "idProduto": 7,
+    "idVendedor": 30,
+    "status": 0,
+    "valor": 90.0,
+    "dataHora": "18/12/2022 03:31:57"
   },
   {
     "id": 2,
-    "idCliente": 2,
-    "idProduto": 3,
-    "idVendedor": 5,
+    "idCliente": 40,
+    "idProduto": 5,
+    "idVendedor": 7,
+    "status": 3,
     "valor": 100.0,
-    "dataHora": {
-      "year": 2022,
-      "month": 11,
-      "dayOfMonth": 18,
-      "hourOfDay": 1,
-      "minute": 46,
-      "second": 50
-    }
-  },
-  {
-    "id": 3,
-    "idCliente": 1,
-    "idProduto": 2,
-    "idVendedor": 3,
-    "valor": 4.0,
-    "dataHora": {
-      "year": 2022,
-      "month": 11,
-      "dayOfMonth": 18,
-      "hourOfDay": 1,
-      "minute": 52,
-      "second": 5
-    }
+    "dataHora": "18/12/2022 03:32:10"
   }
 ]
