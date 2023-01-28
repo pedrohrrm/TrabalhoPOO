@@ -4,22 +4,10 @@
  */
 package controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import modelos.Pedido;
+import model.Pedido;
 
 /**
  *
@@ -28,26 +16,28 @@ import modelos.Pedido;
 public class PedidoController {
     
     public void EfetuaPedido() {
-        String idCliente;
-        String idProduto;
-        String idVendedor;
+        int idCliente;
+        int idProduto;
+        int idVendedor;
         float valor;
         
         Scanner dados = new Scanner(System.in);
         
         System.out.printf("Informe o Id do cliente: ");
-        idCliente = dados.nextLine();
+        idCliente = Integer.parseInt(dados.nextLine());
         
         System.out.printf("Informe o Id do produto: ");
-        idProduto = dados.nextLine();
+        idProduto = Integer.parseInt(dados.nextLine());
         
         System.out.printf("Informe o Id do vendedor: ");
-        idVendedor = dados.nextLine();
+        idVendedor = Integer.parseInt(dados.nextLine());
         
         System.out.printf("Informe o valor do pedido: ");
         valor = dados.nextFloat();
         
-        GravaDadosPedido(idCliente, idProduto, idVendedor, valor);
+        Pedido pedido = new Pedido(idCliente, idProduto, idVendedor, valor);
+        
+        pedido.GravaDadosPedido();
     }
     
     public void CancelaPedido() {    
@@ -61,52 +51,6 @@ public class PedidoController {
         AlteraStatusPedido(id, 3); 
     }
    
-    private void GravaDadosPedido(String idCliente, String idProduto, String idVendedor, float valor) {
-        String dataHora = GeraDataHora();
-        
-        Pedido pedido = new Pedido(Integer.parseInt(idCliente), 
-                Integer.parseInt(idProduto), Integer.parseInt(idVendedor), valor, dataHora);
-        
-        List<Pedido> pedidos = new ArrayList<>();
-        
-        Pedido[] lista = RetornaListaPedidos();
-        
-        if (lista != null) {
-            //Adiciona os clientes ja existente no arquivo
-            for (Pedido lista1 : lista) {
-               pedidos.add(lista1);
-            }
-        } 
-
-        //Adiciona o novo cliente no arquivo
-        pedidos.add(pedido);
-        
-        EscreveArquivo(pedidos);   
-    }
-    
-    private String GeraDataHora() {
-        Date date = new Date(); 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");  
-        String strDate = dateFormat.format(date);  
-        
-        return strDate;
-    }
-
-    public Pedido[] RetornaListaPedidos() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        BufferedReader json;
-        try {
-            json = new BufferedReader(new FileReader("pedido.json"));
-        } catch (FileNotFoundException ex) {
-            return null;
-        }
-            
-        Pedido[] lista = gson.fromJson(json, Pedido[].class);
-
-        return lista;
-    }
-    
     public void ImprimeDadosPedido() {
         int idPedido;
                 
@@ -115,7 +59,7 @@ public class PedidoController {
         System.out.printf("Informe o Id do pedido que deseja imprimir: ");
         idPedido = dados.nextInt();
         
-        Pedido[] lista = RetornaListaPedidos();
+        Pedido[] lista = Pedido.RetornaListaPedidos();
         
         for (Pedido lista1 : lista) {
            if (lista1.getId() == idPedido) {
@@ -126,32 +70,11 @@ public class PedidoController {
     }
     
     public void AlteraStatusPedido(int idPedido, int novoStatus) {
-        List<Pedido> pedidos = new ArrayList<>();
-        Pedido[] lista = RetornaListaPedidos();
-      
-        for (Pedido lista1 : lista) {
-           if (lista1.getId() != idPedido) {              
-               pedidos.add(lista1);
-           } else {
-               lista1.setStatus(novoStatus);
-               pedidos.add(lista1);
-           }
-        }
+        Pedido pedido = new Pedido(idPedido, novoStatus);
         
-        EscreveArquivo(pedidos);
+        pedido.AlteraStatusPedido();
     }
     
-    public void EscreveArquivo(List<Pedido> pedidos) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	String json = gson.toJson(pedidos);
-
-        try ( 
-            //Escreve Json convertido em arquivo chamado "pedido.json"
-            FileWriter writer = new FileWriter("pedido.json")) {
-            writer.write(json);
-        } catch (IOException ex) {
-            Logger.getLogger(PedidoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
     
 }

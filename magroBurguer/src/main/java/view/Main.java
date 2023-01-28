@@ -2,7 +2,7 @@
 
 package view;
 
-import modelos.Cliente;
+import model.Cliente;
 import modelos.Usuario;
 
 /**

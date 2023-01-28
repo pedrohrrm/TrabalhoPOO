@@ -4,19 +4,9 @@
  */
 package controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import modelos.Cliente;
+import model.Cliente;
 
 /**
  *
@@ -42,9 +32,11 @@ public class ClienteController {
         if (!ValidaCliente(nome, endereco)) {
             System.out.println("Dados do cliente inválidos");
             return;
-        }   
+        } 
         
-        GravaDadosCliente(nome, endereco, celular);  
+        Cliente cliente = new Cliente(nome, endereco, celular);
+        
+        cliente.GravaDadosCliente();  
     }
     
     public void AlteraCliente() {
@@ -67,56 +59,10 @@ public class ClienteController {
         System.out.printf("Informe o celular: ");
         celular = dados.nextLine();
         
-        if ((!"".equals(nome)) && (!"".equals(endereco)) && (!"".equals(celular))) {
-            if (!ValidaCliente(nome, endereco, celular)) {
-                return;
-            }
-        } else if ((!"".equals(nome)) && (!"".equals(endereco)))  {
-            if (!ValidaCliente(nome, endereco)) {
-                return;
-            } 
-        } else {
-            if (!ValidaCliente(nome)) {
-                return;
-            } 
-        }
+        Cliente cliente = new Cliente(Integer.parseInt(id), nome, endereco, celular);
         
-        Cliente[] lista = retornaListaClientes();
-        
-        List<Cliente> clientes = new ArrayList<>();
-        
-        
-        for (int i = 0; i < lista.length; i++) {
-            if (lista[i].getId() == Integer.parseInt(id)) {
-                if (!"".equals(nome)) {
-                    lista[i].setNome(nome);
-                }
-                
-                if (!"".equals(endereco)) {
-                    lista[i].setEndereco(endereco);
-                }
-                
-                if (!"".equals(celular)) {
-                    lista[i].setCelular(celular);
-                }
-         
-                clientes.add(lista[i]);
-            } else {
-                clientes.add(lista[i]);
-            }
-        }
-        
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	String json = gson.toJson(clientes);
-
-        try ( 
-            //Escreve Json convertido em arquivo chamado "cliente.json"
-            FileWriter writer = new FileWriter("cliente.json")) {
-            writer.write(json);
-        } catch (IOException ex) {
-            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-    }
+        cliente.AlteraCliente();
+    }  
     
     public Boolean ValidaCliente(String nome) {
         return !(("".equals(nome)));
@@ -130,42 +76,7 @@ public class ClienteController {
         return !(("".equals(nome)) || ("".equals(endereco)) || ("".equals(celular)));      
     }
 
-    private void GravaDadosCliente(String nome, String endereco, String celular) throws IOException {
-        Cliente cliente = new Cliente(nome, endereco, celular);
-        List<Cliente> clientes = new ArrayList<>();
-       
-        Cliente[] lista = retornaListaClientes();
-        
-        //Adiciona os clientes ja existente no arquivo
-        for (Cliente lista1 : lista) {
-           clientes.add(lista1);
-        }
-        
-        //Adiciona o novo cliente no arquivo
-        clientes.add(cliente);
-        
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	String json = gson.toJson(clientes);
-
-        try ( 
-            //Escreve Json convertido em arquivo chamado "cliente.json"
-            FileWriter writer = new FileWriter("cliente.json")) {
-            writer.write(json);
-        }
-    }
     
-    public Cliente[] retornaListaClientes() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        BufferedReader json = null;
-        try {
-            json = new BufferedReader(new FileReader("cliente.json"));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-        Cliente[] lista = gson.fromJson(json, Cliente[].class);
-
-        return lista;
-    }
+    
+    
 }

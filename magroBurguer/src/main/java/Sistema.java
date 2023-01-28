@@ -1,5 +1,5 @@
 
-package modelos;
+
 
 import controller.ClienteController;
 import controller.PedidoController;
@@ -17,13 +17,12 @@ public class Sistema  {
         PedidoController pedidoController = new PedidoController();
         
 //        clienteController.AlteraCliente();     
-//        clienteController.CadastraCliente();
+        clienteController.CadastraCliente();
         
 //        pedidoController.EfetuaPedido();
-//        pedidoController.ExcluiPedido();
 //        pedidoController.ImprimeDadosPedido();
-        pedidoController.CancelaPedido();
-//        pedidoController.AlteraStatusPedido(1, 4);
+//        pedidoController.CancelaPedido();
+//        pedidoController.AlteraStatusPedido(3, 4);
         
         
     }

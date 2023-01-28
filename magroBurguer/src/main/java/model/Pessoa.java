@@ -1,5 +1,5 @@
 
-package modelos;
+package model;
 
 import controller.ClienteController;
 import java.io.FileNotFoundException;
@@ -15,7 +15,12 @@ abstract public class Pessoa {
     protected String endereco;
     protected String celular;
     
-    public Pessoa() {}
+    public Pessoa(int id, String nome, String endereco, String celular) {
+        this.id = id;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.celular = celular;
+    }
     
     public Pessoa(String nome) {
         this.nome = nome;
@@ -68,14 +73,6 @@ abstract public class Pessoa {
      * Gera Id para pessoa
      * 
      */
-    private void GeraId() throws FileNotFoundException {  
-        ClienteController clienteController = new ClienteController();
-        Cliente[] lista = clienteController.retornaListaClientes();
-        
-        if (lista != null) {
-            this.id = lista.length + 1;
-        } else {
-            this.id = 1;
-        } 
-    } 
+    abstract void GeraId(); 
+ 
 }
