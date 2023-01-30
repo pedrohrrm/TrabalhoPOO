@@ -4,10 +4,13 @@
  */
 package controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import java.util.Scanner;
 import model.Pedido;
+import static model.Pedido.RetornaListaPedidos;
 
 /**
  *
@@ -15,6 +18,9 @@ import model.Pedido;
  */
 public class PedidoController {
     
+    /**
+     *
+     */
     public void EfetuaPedido() {
         int idCliente;
         int idProduto;
@@ -38,6 +44,8 @@ public class PedidoController {
         Pedido pedido = new Pedido(idCliente, idProduto, idVendedor, valor);
         
         pedido.GravaDadosPedido();
+        
+        NotaFiscalController.geraNotaFiscal(idVendedor, idCliente, idProduto);
     }
     
     public void CancelaPedido() {    
@@ -69,12 +77,38 @@ public class PedidoController {
         }
     }
     
+    /**
+     *
+     * @param idPedido
+     * @param novoStatus
+     */
     public void AlteraStatusPedido(int idPedido, int novoStatus) {
         Pedido pedido = new Pedido(idPedido, novoStatus);
         
         pedido.AlteraStatusPedido();
     }
     
+    public void PesquisaPedidos() {}
     
+    public ArrayList<Pedido> PesquisarPedidosPorIntervaloDeDatas(String inicioStr, String fimStr) {
+    ArrayList<Pedido> resultado = new ArrayList<>();
     
+    Pedido[] pedidos = RetornaListaPedidos();
+    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    
+    try {
+        Date inicio = dateFormat.parse(inicioStr);
+        Date fim = dateFormat.parse(fimStr);
+        for (Pedido pedido : pedidos) {
+            if (dateFormat.parse(pedido.getDataHora()).after(inicio)  
+                && dateFormat.parse(pedido.getDataHora()).before(fim)) {
+          resultado.add(pedido);
+            }
+        }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return resultado;
+    }   
 }

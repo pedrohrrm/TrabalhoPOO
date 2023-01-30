@@ -1,8 +1,6 @@
 
 package model;
 
-import controller.ClienteController;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -15,6 +13,8 @@ abstract public class Pessoa {
     protected String endereco;
     protected String celular;
     
+    public Pessoa() {}
+    
     public Pessoa(int id, String nome, String endereco, String celular) {
         this.id = id;
         this.nome = nome;
@@ -26,14 +26,14 @@ abstract public class Pessoa {
         this.nome = nome;
     }
 
-    public Pessoa(String nome, String endereco) throws IOException {
+    public Pessoa(String nome, String endereco) {
         GeraId();
         this.nome = nome;
         this.endereco = endereco;
         
     }
 
-    public Pessoa(String nome, String endereco, String celular) throws IOException {
+    public Pessoa(String nome, String endereco, String celular) {
         GeraId();
         this.nome = nome;
         this.endereco = endereco;
@@ -68,11 +68,6 @@ abstract public class Pessoa {
         this.celular = celular;
     }
     
-    /**
-     * 
-     * Gera Id para pessoa
-     * 
-     */
     abstract void GeraId(); 
  
 }

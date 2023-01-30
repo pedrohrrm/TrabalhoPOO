@@ -25,5 +25,41 @@
     "status": 3,
     "valor": 156.0,
     "dataHora": "28/01/2023 02:58:59"
+  },
+  {
+    "id": 4,
+    "idCliente": 1,
+    "idProduto": 2,
+    "idVendedor": 3,
+    "status": 0,
+    "valor": 10.0,
+    "dataHora": "29/01/2023 11:33:39"
+  },
+  {
+    "id": 5,
+    "idCliente": 1,
+    "idProduto": 1,
+    "idVendedor": 1,
+    "status": 0,
+    "valor": 10.0,
+    "dataHora": "29/01/2023 01:15:38"
+  },
+  {
+    "id": 6,
+    "idCliente": 1,
+    "idProduto": 1,
+    "idVendedor": 1,
+    "status": 0,
+    "valor": 10.0,
+    "dataHora": "29/01/2023 01:17:52"
+  },
+  {
+    "id": 7,
+    "idCliente": 1,
+    "idProduto": 1,
+    "idVendedor": 1,
+    "status": 0,
+    "valor": 1.0,
+    "dataHora": "29/01/2023 01:18:53"
   }
 ]

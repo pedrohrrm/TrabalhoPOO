@@ -2,7 +2,6 @@ package model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import controller.PedidoController;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,7 +10,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,7 +26,7 @@ import java.util.logging.Logger;
  * 2 = Pedido entregue;
  * 3 = Pedido cancelado;
  */
-public class Pedido {
+public class Pedido implements Comparable<Pedido>{
     private int id;
     private int idCliente;
     private int idProduto;
@@ -133,18 +132,14 @@ public class Pedido {
         };
     }
     
-    public void GravaDadosPedido() {
-        String dataHora = GeraDataHora();
-        
+    public void GravaDadosPedido() {      
         List<Pedido> pedidos = new ArrayList<>();
         
         Pedido[] lista = RetornaListaPedidos();
         
         if (lista != null) {
             //Adiciona os clientes ja existente no arquivo
-            for (Pedido lista1 : lista) {
-               pedidos.add(lista1);
-            }
+            pedidos.addAll(Arrays.asList(lista));
         } 
 
         //Adiciona o novo cliente no arquivo
@@ -176,6 +171,17 @@ public class Pedido {
         return lista;
     }
     
+    static public Pedido RetornaPedido(int idPedido) {
+        Pedido[] lista = RetornaListaPedidos();
+        
+        for (Pedido lista1 : lista) {
+            if (lista1.getId() == idPedido) {
+                return lista1;
+            }
+        }
+        return null;
+    }
+    
     public void AlteraStatusPedido() {
         List<Pedido> pedidos = new ArrayList<>();
         Pedido[] lista = RetornaListaPedidos();
@@ -201,7 +207,7 @@ public class Pedido {
             FileWriter writer = new FileWriter("pedido.json")) {
             writer.write(json);
         } catch (IOException ex) {
-            Logger.getLogger(PedidoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Pedido.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -215,5 +221,14 @@ public class Pedido {
             + "\nValor: " + this.valor
             + "\nPedido efetuado em: " + this.dataHora);
 
+    }
+
+    @Override
+    public int compareTo(Pedido o) {
+        if (!this.dataHora.equals(o.dataHora)) {
+            return this.dataHora.compareTo(o.dataHora);
+        } else {
+            return this.id - o.id;
+        }
     }
 }

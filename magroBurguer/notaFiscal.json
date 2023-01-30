@@ -1,0 +1,25 @@
+[
+  {
+    "idNota": 1,
+    "pedido": {
+      "id": 1,
+      "idCliente": 4,
+      "idProduto": 7,
+      "idVendedor": 30,
+      "status": 0,
+      "valor": 90.0,
+      "dataHora": "18/12/2022 03:31:57"
+    },
+    "cliente": {
+      "id": 1,
+      "nome": "joao",
+      "endereco": "rua123",
+      "celular": "1234"
+    },
+    "produto": {
+      "id": 1,
+      "descricao": "Xtudo",
+      "valor": 15.5
+    }
+  }
+]

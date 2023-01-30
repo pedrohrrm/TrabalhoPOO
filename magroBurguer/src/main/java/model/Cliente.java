@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,11 @@ import java.util.logging.Logger;
  *
  * @author pedro
  */
-public final class Cliente extends Pessoa {
+public final class Cliente extends Pessoa implements Comparable<Cliente>{
+    public Cliente() {
+        Sistema.contadorClientes++;
+        Sistema.contadorClientesProtected++;
+    }
     
     public Cliente (int id, String nome, String endereco, String celular) {
         super(id, nome, endereco, celular);
@@ -39,12 +44,10 @@ public final class Cliente extends Pessoa {
     public void GravaDadosCliente() throws IOException { 
         List<Cliente> clientes = new ArrayList<>();
        
-        Cliente[] lista = retornaListaClientes();
+        Cliente[] lista = RetornaListaClientes();
         
         //Adiciona os clientes ja existente no arquivo
-        for (Cliente lista1 : lista) {
-           clientes.add(lista1);
-        }
+        clientes.addAll(Arrays.asList(lista));
         
         //Adiciona o novo cliente no arquivo
         clientes.add(this);
@@ -60,7 +63,7 @@ public final class Cliente extends Pessoa {
     }
     
     public void AlteraCliente() {        
-        Cliente[] lista = retornaListaClientes();
+        Cliente[] lista = RetornaListaClientes();
         
         List<Cliente> clientes = new ArrayList<>();
         
@@ -97,20 +100,31 @@ public final class Cliente extends Pessoa {
         }  
     }
     
-    public Cliente[] retornaListaClientes() {
+    static public Cliente[] RetornaListaClientes() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         BufferedReader json = null;
         try {
             json = new BufferedReader(new FileReader("cliente.json"));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
             
         Cliente[] lista = gson.fromJson(json, Cliente[].class);
 
         return lista;
     } 
+    
+    static public Cliente RetornaCliente(int idCliente) {
+        Cliente[] lista = RetornaListaClientes();
+        
+        for (Cliente lista1 : lista) {
+            if (lista1.getId() == idCliente) {
+                return lista1;
+            }
+        }
+        return null;
+    }
     
     @Override
     public String toString() {
@@ -126,7 +140,7 @@ public final class Cliente extends Pessoa {
 
     @Override
     void GeraId() {
-        Cliente[] lista = retornaListaClientes();
+        Cliente[] lista = RetornaListaClientes();
         
         if (lista != null) {
             this.id = lista.length + 1;
@@ -135,5 +149,12 @@ public final class Cliente extends Pessoa {
         } 
     }
 
-
+    @Override
+    public int compareTo(Cliente o) {
+        if (!this.nome.equals(o.nome)) {
+            return this.nome.compareTo(o.nome);
+        } else {
+            return this.id - o.id;
+        }
+    }
 }
